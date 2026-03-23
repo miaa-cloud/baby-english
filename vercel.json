@@ -12,11 +12,28 @@
       "dest": "server.js"
     },
     {
+      "src": "/(.+\\.html)$",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/(.+\\.png)$",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/(.+\\.css)$",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/(.+\\.js)$",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/",
+      "dest": "public/index.html"
+    },
+    {
       "src": "/(.*)",
       "dest": "public/$1"
     }
-  ],
-  "env": {
-    "PORT": "3000"
-  }
+  ]
 }
