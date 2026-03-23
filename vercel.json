@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
+      "src": "server.js",
       "use": "@vercel/node"
     }
   ],
@@ -12,24 +12,20 @@
       "dest": "server.js"
     },
     {
-      "src": "/(.+\\.html)$",
-      "dest": "public/$1"
+      "src": "/qrcode.html",
+      "dest": "public/qrcode.html"
     },
     {
-      "src": "/(.+\\.png)$",
-      "dest": "public/$1"
+      "src": "/qr-code.png",
+      "dest": "public/qr-code.png"
     },
     {
-      "src": "/(.+\\.css)$",
-      "dest": "public/$1"
+      "src": "/deployment-success.html",
+      "dest": "public/deployment-success.html"
     },
     {
-      "src": "/(.+\\.js)$",
-      "dest": "public/$1"
-    },
-    {
-      "src": "/",
-      "dest": "public/index.html"
+      "src": "/click-test.html",
+      "dest": "public/click-test.html"
     },
     {
       "src": "/(.*)",
