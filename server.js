@@ -399,7 +399,12 @@ app.get('/test-links.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'test-douyin-links.html'));
 });
 
-app.listen(PORT, '0.0.0.0', () => {
+// Vercel 部署需要导出 app
+module.exports = app;
+
+// 本地开发时才启动服务器
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(PORT, '0.0.0.0', () => {
   console.log(` 婴儿英语启蒙工具已启动`);
   console.log(`📱 本地访问：http://localhost:${PORT}`);
   console.log(`📱 手机访问：http://<你的IP 地址>:${PORT}`);
