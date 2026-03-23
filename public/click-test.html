@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>点击测试</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-card {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+        .test-card:active { background: #f0f0f0; }
+        .result { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background: #e8f5e9; 
+            border-radius: 5px;
+            display: none;
+        }
+        .log { 
+            margin-top: 20px; 
+            padding: 10px; 
+            background: #fff3e0; 
+            border-radius: 5px;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>📱 手机点击测试</h1>
+    <p style="color: #666; margin: 10px 0;">点击下面的卡片测试跳转功能</p>
+    
+    <div class="test-card" onclick="testJump('https://www.douyin.com/search/Baby%20Shark', 'Baby Shark')">
+        <h3>🎵 测试跳转到 Baby Shark</h3>
+        <p style="color: #666; font-size: 14px; margin-top: 5px;">点击这里会跳转到抖音搜索页面</p>
+    </div>
+    
+    <div class="test-card" onclick="testJump('https://m.douyin.com/qishui/playlist/7501150916012263463', 'Baby Shark Playlist')">
+        <h3>🎵 测试跳转到抖音歌单</h3>
+        <p style="color: #666; font-size: 14px; margin-top: 5px;">点击这里会跳转到 Baby Shark 歌单</p>
+    </div>
+    
+    <div id="result" class="result"></div>
+    <div id="log" class="log"><strong>日志:</strong><br></div>
+
+    <script>
+        let logCount = 0;
+        
+        function addLog(msg) {
+            logCount++;
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            logDiv.innerHTML += `[${time}] ${msg}<br>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+        
+        function testJump(url, name) {
+            addLog(`准备跳转：${name}`);
+            addLog(`URL: ${url}`);
+            
+            // 显示结果
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `✅ 准备跳转：<strong>${name}</strong><br>即将打开抖音...`;
+            
+            addLog('开始跳转...');
+            
+            // 延迟一下再跳转，让用户看到提示
+            setTimeout(() => {
+                window.location.href = url;
+            }, 500);
+        }
+        
+        // 页面加载时的日志
+        addLog('页面加载完成');
+        addLog('用户代理：' + navigator.userAgent.substring(0, 50) + '...');
+    </script>
+</body>
+</html>

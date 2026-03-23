@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>婴儿英语启蒙 - 扫码访问</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #667eea;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .qr-code {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .qr-code img {
+            width: 300px;
+            height: 300px;
+            display: block;
+        }
+        
+        .url-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+        
+        .features {
+            text-align: left;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 15px;
+        }
+        
+        .features h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            color: #555;
+            font-size: 14px;
+        }
+        
+        .feature-icon {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff3e0;
+            border-radius: 15px;
+            text-align: left;
+        }
+        
+        .instructions h3 {
+            color: #ef6c00;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .step {
+            margin: 10px 0;
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            background: #ef6c00;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 24px;
+            margin-right: 8px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>👶 婴儿英语启蒙工具</h1>
+        <p class="subtitle">SSS儿歌 · 亲子口语 · 随时随地学</p>
+        
+        <div class="qr-code">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://baby-english-demo.vercel.app" 
+                 alt="扫码访问二维码"
+                 id="qrCodeImage">
+        </div>
+        
+        <div class="url-text">
+            baby-english-demo.vercel.app
+        </div>
+        
+        <div class="features">
+            <h3>✨ 功能特色</h3>
+            <div class="feature-item">
+                <span class="feature-icon">🎵</span>
+                <span>10 首 SSS 级英语启蒙儿歌</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">💬</span>
+                <span>8 个亲子口语教学场景</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🌱</span>
+                <span>初/中/高三级难度分级</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📱</span>
+                <span>微信 H5 适配，随时随地学习</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">🚀</span>
+                <span>一键跳转抖音播放</span>
+            </div>
+            <div class="feature-item">
+                <span class="feature-icon">📚</span>
+                <span>自动保存学习记录</span>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>📖 使用步骤</h3>
+            <div class="step">
+                <span class="step-number">1</span>
+                打开微信「扫一扫」，扫描二维码
+            </div>
+            <div class="step">
+                <span class="step-number">2</span>
+                选择 SSS儿歌或亲子口语分类
+            </div>
+            <div class="step">
+                <span class="step-number">3</span>
+                点击任意视频卡片，跳转抖音播放
+            </div>
+            <div class="step">
+                <span class="step-number">4</span>
+                点击右上角「···」添加到收藏，方便下次访问
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; color: #999; font-size: 12px;">
+            💡 提示：确保手机网络畅通，视频在抖音 APP 中播放
+        </div>
+    </div>
+    
+    <script>
+        // 自动下载二维码图片
+        window.addEventListener('load', function() {
+            console.log('页面加载完成，二维码已生成');
+            console.log('公网访问地址：https://baby-english-demo.vercel.app');
+        });
+    </script>
+</body>
+</html>

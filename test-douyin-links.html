@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>测试抖音链接</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .test-item { margin: 10px 0; padding: 10px; background: #f5f5f5; border-radius: 5px; }
+        .success { color: green; }
+        .error { color: red; }
+    </style>
+</head>
+<body>
+    <h1>抖音视频链接测试</h1>
+    <div id="results"></div>
+    
+    <script>
+        async function testLinks() {
+            const resultsDiv = document.getElementById('results');
+            let html = '';
+            
+            try {
+                // 测试儿歌链接
+                const songsRes = await fetch('/api/videos/songs');
+                const songs = await songsRes.json();
+                
+                html += '<h2>SSS 儿歌 ({0} 个)</h2>'.replace('{0}', songs.length);
+                songs.forEach((song, i) => {
+                    html += `
+                        <div class="test-item">
+                            <strong>${i+1}. ${song.title}</strong> (${song.chinese})<br>
+                            难度：${song.levelName}<br>
+                            抖音链接：<a href="${song.douyinUrl}" target="_blank">${song.douyinUrl.substring(0, 60)}...</a><br>
+                            ${song.douyinUrl ? '<span class="success">✅ 链接存在</span>' : '<span class="error">❌ 链接缺失</span>'}
+                        </div>
+                    `;
+                });
+                
+                // 测试口语链接
+                const convRes = await fetch('/api/videos/conversations');
+                const conversations = await convRes.json();
+                
+                html += '<h2>亲子口语 ({0} 个)</h2>'.replace('{0}', conversations.length);
+                conversations.forEach((conv, i) => {
+                    html += `
+                        <div class="test-item">
+                            <strong>${i+1}. ${conv.title}</strong><br>
+                            难度：${conv.levelName}<br>
+                            抖音链接：<a href="${conv.douyinUrl}" target="_blank">${conv.douyinUrl.substring(0, 60)}...</a><br>
+                            ${conv.douyinUrl ? '<span class="success">✅ 链接存在</span>' : '<span class="error">❌ 链接缺失</span>'}
+                        </div>
+                    `;
+                });
+                
+            } catch (error) {
+                html = '<div class="error">测试失败：' + error.message + '</div>';
+            }
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        testLinks();
+    </script>
+</body>
+</html>

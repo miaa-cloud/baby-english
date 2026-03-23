@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="wechat-enable-text-zoom-em">
+    <title>👶 婴儿英语启蒙</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+
+        .header {
+            background: rgba(255,255,255,0.95);
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            flex: 1;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .nav-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .nav-tab:not(.active) {
+            color: #666;
+            background: #f5f5f5;
+        }
+
+        .container {
+            padding: 10px;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title .icon {
+            font-size: 1.5em;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .video-card {
+            background: #f8f9ff;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .video-card:active {
+            transform: scale(0.98);
+        }
+
+        .video-cover {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2em;
+            position: relative;
+        }
+
+        .video-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .play-icon {
+            position: absolute;
+            font-size: 0.5em;
+            background: rgba(255,255,255,0.8);
+            border-radius: 50%;
+            padding: 10px;
+        }
+
+        .video-info {
+            padding: 12px;
+        }
+
+        .video-title {
+            font-size: 0.95em;
+            color: #333;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .video-chinese {
+            font-size: 0.85em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .video-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75em;
+        }
+
+        .level-tag {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .level-beginner {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .level-intermediate {
+            background: #fff3e0;
+            color: #ef6c00;
+        }
+
+        .level-advanced {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .duration {
+            color: #999;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            display: flex;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active {
+            color: #667eea;
+        }
+
+        .nav-item .icon {
+            font-size: 1.5em;
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .nav-item .label {
+            font-size: 0.8em;
+        }
+
+        /* 播放页面 */
+        .player-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            z-index: 2000;
+            overflow-y: auto;
+        }
+
+        .player-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .back-btn {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .player-content {
+            padding: 20px;
+        }
+
+        .video-player {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .sentence-list {
+            margin-top: 20px;
+        }
+
+        .sentence-item {
+            background: #f8f9ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .sentence-en {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .sentence-cn {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        /* 学习记录 */
+        .history-list {
+            list-style: none;
+        }
+
+        .history-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            background: #f8f9ff;
+            border-radius: 12px;
+            margin-bottom: 10px;
+        }
+
+        .history-icon {
+            font-size: 2em;
+        }
+
+        .history-info {
+            flex: 1;
+        }
+
+        .history-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .history-time {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        @media (min-width: 768px) {
+            .video-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="header">
+        <h1>👶 婴儿英语启蒙</h1>
+        <p>SSS 儿歌 · 亲子口语 · 快乐学习</p>
+    </div>
+
+    <!-- 主页面 -->
+    <div id="mainPage">
+        <!-- 分类导航 -->
+        <div class="nav-tabs">
+            <div class="nav-tab active" onclick="switchTab('songs')">
+                🎵 SSS 儿歌
+            </div>
+            <div class="nav-tab" onclick="switchTab('conversations')">
+                💬 亲子口语
+            </div>
+        </div>
+
+        <!-- 内容区域 -->
+        <div class="container">
+            <!-- 难度筛选 -->
+            <div class="section">
+                <div class="filter-bar" id="levelFilter">
+                    <button class="filter-btn active" onclick="filterLevel('all')">全部难度</button>
+                    <button class="filter-btn" onclick="filterLevel('beginner')">🌱 初级</button>
+                    <button class="filter-btn" onclick="filterLevel('intermediate')">🌿 中级</button>
+                    <button class="filter-btn" onclick="filterLevel('advanced')">🌳 高级</button>
+                </div>
+            </div>
+
+            <!-- 视频列表 -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="icon">📺</span>
+                    <span id="sectionTitle">热门儿歌</span>
+                </div>
+                <div id="videoList" class="video-grid">
+                    <div class="loading">加载中...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 播放页面 -->
+    <div id="playerPage" class="player-page">
+        <div class="player-header">
+            <button class="back-btn" onclick="closePlayer()">← 返回</button>
+            <h2 id="playerTitle">视频标题</h2>
+        </div>
+        <div class="player-content">
+            <div class="video-player" id="videoPlayer">
+                <div>
+                    <div style="font-size: 3em; margin-bottom: 20px;">🎬</div>
+                    <div>视频播放器</div>
+                    <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.7;">
+                        （实际使用时可嵌入抖音/西瓜视频播放器）
+                    </div>
+                </div>
+            </div>
+            
+            <div id="videoInfo">
+                <h3 id="infoTitle" style="margin-bottom: 10px;"></h3>
+                <p id="infoDesc" style="color: #666; margin-bottom: 15px;"></p>
+                <div id="infoMeta" style="display: flex; gap: 10px; margin-bottom: 20px;"></div>
+            </div>
+
+            <div id="sentenceList" class="sentence-list"></div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav">
+        <div class="nav-item active" onclick="switchNav('home')">
+            <span class="icon">🏠</span>
+            <span class="label">首页</span>
+        </div>
+        <div class="nav-item" onclick="switchNav('history')">
+            <span class="icon">📚</span>
+            <span class="label">学习记录</span>
+        </div>
+        <div class="nav-item" onclick="switchNav('favorites')">
+            <span class="icon">⭐</span>
+            <span class="label">收藏</span>
+        </div>
+        <div class="nav-item" onclick="switchNav('profile')">
+            <span class="icon">👤</span>
+            <span class="label">我的</span>
+        </div>
+    </div>
+
+    <script>
+        // 全局状态
+        let currentTab = 'songs';
+        let currentLevel = 'all';
+        let currentCategory = null;
+        let videos = [];
+        let history = JSON.parse(localStorage.getItem('learningHistory') || '[]');
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            loadVideos();
+        });
+
+        // 切换分类
+        function switchTab(tab) {
+            currentTab = tab;
+            currentLevel = 'all';
+            currentCategory = null;
+            
+            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.getElementById('sectionTitle').textContent = tab === 'songs' ? '热门儿歌' : '亲子口语';
+            loadVideos();
+        }
+
+        // 切换底部导航
+        function switchNav(page) {
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            event.target.closest('.nav-item').classList.add('active');
+            
+            if (page === 'home') {
+                document.getElementById('mainPage').style.display = 'block';
+            } else if (page === 'history') {
+                showHistory();
+            } else if (page === 'favorites') {
+                showFavorites();
+            } else if (page === 'profile') {
+                alert('个人中心功能开发中...');
+            }
+        }
+
+        // 加载视频列表
+        async function loadVideos() {
+            const videoList = document.getElementById('videoList');
+            videoList.innerHTML = '<div class="loading">加载中...</div>';
+            
+            try {
+                let url = `/api/videos/${currentTab}`;
+                const params = new URLSearchParams();
+                
+                if (currentLevel !== 'all') {
+                    params.append('level', currentLevel);
+                }
+                if (currentCategory) {
+                    params.append('category', currentCategory);
+                }
+                
+                if (params.toString()) {
+                    url += '?' + params.toString();
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                videos = data;
+                
+                console.log('加载成功，视频数量:', data.length);
+                console.log('第一个视频数据:', data[0]);
+                
+                renderVideos(data);
+            } catch (error) {
+                console.error('加载失败:', error);
+                videoList.innerHTML = '<div class="empty-state"><div class="icon">😢</div><div>加载失败，请重试</div></div>';
+            }
+        }
+
+        // 渲染视频列表
+        function renderVideos(data) {
+            const videoList = document.getElementById('videoList');
+            
+            if (data.length === 0) {
+                videoList.innerHTML = '<div class="empty-state"><div class="icon">📭</div><div>暂无视频</div></div>';
+                return;
+            }
+            
+            console.log('🎬 开始渲染视频列表，数量:', data.length);
+            console.log('🎬 第一个视频:', data[0].title, '抖音链接:', data[0].douyinUrl);
+            
+            videoList.innerHTML = data.map((video, index) => `
+                <div class="video-card" onclick="jumpToDouyinByIndex(${index})">
+                    <div class="video-cover">
+                        ${video.cover ? `<img src="${video.cover}" alt="${video.title}">` : '🎵'}
+                        <div class="play-icon">▶️</div>
+                    </div>
+                    <div class="video-info">
+                        <div class="video-title">${video.title}</div>
+                        <div class="video-chinese">${video.chinese || ''}</div>
+                        <div class="video-meta">
+                            <span class="level-tag level-${video.level}">${video.levelName}</span>
+                            <span class="duration">${video.duration || '--:--'}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            console.log('✅ 视频列表渲染完成');
+        }
+
+        // 筛选难度
+        function filterLevel(level) {
+            currentLevel = level;
+            document.querySelectorAll('#levelFilter .filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent.includes(getLevelName(level))) {
+                    btn.classList.add('active');
+                }
+            });
+            loadVideos();
+        }
+
+        function getLevelName(level) {
+            const names = {
+                'all': '全部难度',
+                'beginner': '初级',
+                'intermediate': '中级',
+                'advanced': '高级'
+            };
+            return names[level] || level;
+        }
+
+        // 跳转抖音播放
+        function jumpToDouyinByIndex(index) {
+            console.log('🎵 点击了视频，索引:', index);
+            console.log('🎵 videos 数组长度:', videos.length);
+            
+            const video = videos[index];
+            if (!video) {
+                console.error('❌ 视频不存在，索引:', index);
+                alert('视频加载失败，请刷新页面重试');
+                return;
+            }
+            
+            console.log('✅ 找到视频:', video.title);
+            console.log('🔗 抖音链接:', video.douyinUrl);
+            
+            if (!video.douyinUrl) {
+                alert('该视频暂未添加抖音链接');
+                return;
+            }
+            
+            // 添加到历史记录
+            addToHistory(video);
+            console.log('📝 已添加到历史记录');
+            
+            // 直接在当前窗口打开抖音视频（微信中更好用）
+            console.log('🚀 开始跳转到抖音...');
+            window.location.href = video.douyinUrl;
+        }
+
+        // 播放视频
+        function playVideo(videoId) {
+            const video = videos.find(v => v.id === videoId);
+            if (!video) return;
+            
+            // 显示播放页面
+            document.getElementById('playerPage').style.display = 'block';
+            document.getElementById('playerTitle').textContent = video.title;
+            document.getElementById('infoTitle').textContent = video.title;
+            document.getElementById('infoDesc').textContent = video.description || '';
+            
+            // 显示元数据
+            const metaHtml = `
+                <span class="level-tag level-${video.level}">${video.levelName}</span>
+                <span style="color: #999; font-size: 0.9em;">⏱ ${video.duration || '--:--'}</span>
+            `;
+            document.getElementById('infoMeta').innerHTML = metaHtml;
+            
+            // 如果是口语，显示句子列表
+            const sentenceList = document.getElementById('sentenceList');
+            if (video.sentences) {
+                sentenceList.innerHTML = `
+                    <h3 style="margin-bottom: 15px;">📝 常用句子</h3>
+                    ${video.sentences.map(s => `
+                        <div class="sentence-item">
+                            <div class="sentence-en">${s.english}</div>
+                            <div class="sentence-cn">${s.chinese}</div>
+                        </div>
+                    `).join('')}
+                `;
+                sentenceList.style.display = 'block';
+            } else {
+                sentenceList.style.display = 'none';
+            }
+            
+            // 添加到历史记录
+            addToHistory(video);
+        }
+
+        // 关闭播放器
+        function closePlayer() {
+            document.getElementById('playerPage').style.display = 'none';
+        }
+
+        // 添加到历史记录
+        function addToHistory(video) {
+            const record = {
+                id: video.id,
+                title: video.title,
+                type: currentTab,
+                time: new Date().toISOString()
+            };
+            
+            // 移除重复记录
+            history = history.filter(h => h.id !== video.id);
+            
+            // 添加到开头
+            history.unshift(record);
+            
+            // 只保留最近 50 条
+            history = history.slice(0, 50);
+            
+            // 保存到 localStorage
+            localStorage.setItem('learningHistory', JSON.stringify(history));
+        }
+
+        // 显示历史记录
+        function showHistory() {
+            document.getElementById('mainPage').style.display = 'none';
+            
+            const content = document.querySelector('.container');
+            if (history.length === 0) {
+                content.innerHTML = `
+                    <div class="section">
+                        <div class="empty-state">
+                            <div class="icon">📚</div>
+                            <div>暂无学习记录</div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                content.innerHTML = `
+                    <div class="section">
+                        <div class="section-title">
+                            <span class="icon">📚</span>
+                            <span>学习记录</span>
+                        </div>
+                        <ul class="history-list">
+                            ${history.map(h => `
+                                <li class="history-item" onclick="playVideoFromHistory('${h.id}', '${h.type}')">
+                                    <div class="history-icon">🎬</div>
+                                    <div class="history-info">
+                                        <div class="history-title">${h.title}</div>
+                                        <div class="history-time">${new Date(h.time).toLocaleString('zh-CN')}</div>
+                                    </div>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+        }
+
+        // 从历史记录播放
+        function playVideoFromHistory(videoId, type) {
+            currentTab = type;
+            switchTab(type);
+            setTimeout(() => {
+                playVideo(videoId);
+            }, 300);
+        }
+
+        // 显示收藏
+        function showFavorites() {
+            document.getElementById('mainPage').style.display = 'none';
+            
+            const content = document.querySelector('.container');
+            if (favorites.length === 0) {
+                content.innerHTML = `
+                    <div class="section">
+                        <div class="empty-state">
+                            <div class="icon">⭐</div>
+                            <div>暂无收藏</div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // 微信分享配置
+        if (window.WeixinJSBridge) {
+            WeixinJSBridge.on('menu:appmessage', function () {
+                WeixinJSBridge.invoke('sendAppMessage', {
+                    "title": "婴儿英语启蒙",
+                    "desc": "SSS 级英语启蒙儿歌 + 亲子口语教学",
+                    "link": window.location.href,
+                    "img_url": ""
+                }, function (res) {});
+            });
+        }
+    </script>
+</body>
+</html>

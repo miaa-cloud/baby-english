@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>扫码访问 - 婴儿英语启蒙</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .qr-container {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        h1 { margin-bottom: 10px; }
+        p { margin: 10px 0; opacity: 0.9; }
+        .url { 
+            background: rgba(255,255,255,0.2); 
+            padding: 10px 20px; 
+            border-radius: 10px; 
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>👶 婴儿英语启蒙工具</h1>
+    <p>微信扫一扫，在手机上使用</p>
+    
+    <div class="qr-container">
+        <!-- 使用 QR Code API 生成二维码 -->
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=http://192.168.1.227:3000" 
+             alt="扫码访问" 
+             style="width: 300px; height: 300px;">
+    </div>
+    
+    <div class="url">
+        http://192.168.1.227:3000
+    </div>
+    
+    <p style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+        💡 提示：确保手机和电脑在同一 WiFi 网络
+    </p>
+</body>
+</html>
